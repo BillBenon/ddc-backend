@@ -1,2 +1,2 @@
-# ddc-backend
-the Backend apis for ddc ecommerce application
+# KOREA AUTO RWANDA
+KoreaAutoParts&Cars Backend Repository
