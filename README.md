@@ -1,2 +1,2 @@
-# KOREA AUTO RWANDA
-KoreaAutoParts&Cars Backend Repository
+# DDC COMPANY
+ddc Backend Repository
