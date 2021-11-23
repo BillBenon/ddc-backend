@@ -10,10 +10,10 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/supplied-parts:
+ * /api/v1/supplied-products:
  *   get:
  *     tags:
- *       - SuppliedParts
+ *       - SuppliedProducts
  *     description: Returns an array of SuppliedParts
  *     responses:
  *       200:
@@ -29,7 +29,7 @@ router.get("/", requestHandler(controller.get_all))
 
 /**
  * @swagger
- * /api/v1/supplied-parts/{id}:
+ * /api/v1/supplied-products/{id}:
  *   get:
  *     tags:
  *       - SuppliedParts
@@ -51,7 +51,7 @@ router.get("/:id", requestHandler(controller.get_by_id));
 
 /**
  * @swagger
- * /api/v1/supplied-parts:
+ * /api/v1/supplied-products:
  *   post:
  *     tags:
  *       - SuppliedParts
@@ -71,12 +71,12 @@ router.get("/:id", requestHandler(controller.get_by_id));
  *       500:
  *         description: Internal Server Error
  */
-router.post("/", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.create));
+router.post("/",  requestHandler(controller.create));
 
 
 /**
  * @swagger
- * /api/v1/supplied-parts/{id}:
+ * /api/v1/supplied-products/{id}:
  *   delete:
  *     tags:
  *       - SuppliedParts
@@ -95,11 +95,11 @@ router.post("/", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADM
  *       500:
  *         description: Internal Server Error
  */
-router.delete("/:id", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.delete))
+router.delete("/:id",  requestHandler(controller.delete))
 
 /**
  * @swagger
- * /api/v1/supplied-parts/paginated:
+ * /api/v1/supplied-products/paginated:
  *   get:
  *     tags:
  *       - SuppliedParts
@@ -117,7 +117,7 @@ router.get("/paginated", requestHandler(controller.get_all_paginated))
 
 /**
  * @swagger
- * /api/v1/supplied-parts/active:
+ * /api/v1/supplied-products/active:
  *   get:
  *     tags:
  *       - SuppliedParts
@@ -135,11 +135,11 @@ router.get("/active", requestHandler(controller.get_all_active))
 
 /**
  * @swagger
- * /api/v1/supplied-parts/part-supply/{id}:
+ * /api/v1/supplied-products/products-supply/{id}:
  *   get:
  *     tags:
  *       - SuppliedParts
- *     description: Returns  SuppliedPart of a part supply
+ *     description: Returns  SuppliedPart of a products supply
  *     parameters:
  *       - name: id
  *         description: SuppliedPart's id
@@ -157,7 +157,7 @@ router.get("/product-supply/:id", requestHandler(controller.get_all_by_product_s
 
 /**
  * @swagger
- * /api/v1/supplied-parts/spare-part/{id}:
+ * /api/v1/supplied-products/spare-products/{id}:
  *   get:
  *     tags:
  *       - SuppliedParts

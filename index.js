@@ -117,7 +117,7 @@ app.use("/api/v1/test-models", testModelController);
 
 app.use("/api/v1/product-categories", productCategoriesHandler);
 app.use("/api/v1/products-supply", productSupplyHandler);
-app.use("/api/v1/supplied-products", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN, USER_CATEGORY_ENUM.EMPLOYEE])], suppliedProductHandler);
+app.use("/api/v1/supplied-products", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], suppliedProductHandler);
 
 
 app.use("/api/v1/products", productHandler);
@@ -128,7 +128,7 @@ app.use("/api/v1/customer-reviews", customerReviewsController);
 app.use("/api/v1/auth", authController);
 app.use("/api/v1/app-updates", appUpdateController);
 app.use("/api/v1/orders", orderHandler);
-app.use("/api/v1/part-orders", productOrderController);
+app.use("/api/v1/product-orders", productOrderController);
 app.use("/api/v1/delivery-zones", deliveryZoneController);
 app.use("/api/v1/delivery-country-regions", deliveryCountryRegionController);
 app.use("/api/v1/delivery-countries", deliveryCountryController);
@@ -360,7 +360,7 @@ app.get('/test', async (req, res) => {
         //     await PortPricing.findByIdAndDelete(datum._id)
 
         // await sendTestingEmail("andesanselme@gmail.com")
-        return res.send({savedLen: savedParts.length, existingLen: spareParts.length, parts: savedParts})
+        // return res.send({savedLen: savedParts.length, existingLen: spareParts.length, parts: savedParts})
     } catch (e) {
         return res.send(e.message)
     }

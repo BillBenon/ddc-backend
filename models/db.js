@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const db = (process.env.NODE_ENV === 'production') ? process.env.MONGO_URI : (process.env.NODE_ENV === 'production') ? process.env.MONGO_TEST_URI : 'mongodb://localhost:27017/KOREA_AUTO_RWANDA_ECOMMERCE_DB';
+const db = (process.env.NODE_ENV === 'production') ? process.env.MONGO_URI : process.env.MONGO_TEST_URI;
 
-mongoose.set('toObject', { virtuals: true });
+mongoose.set('toObject', {virtuals: true});
 
 const connectDB = async () => {
     try {

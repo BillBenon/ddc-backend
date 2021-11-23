@@ -10,11 +10,11 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/products-supply:
+ * /api/v1/product-supply:
  *   get:
  *     tags:
  *       - ProductSupplies
- *     description: Returns an array of products-supply
+ *     description: Returns an array of product-supply
  *     responses:
  *       200:
  *         description: Success
@@ -29,11 +29,11 @@ router.get("/", requestHandler(controller.get_all));
 
 /**
  * @swagger
- * /api/v1/parts-supply/past-week:
+ * /api/v1/products-supply/past-week:
  *   get:
  *     tags:
  *       - PartSupplies
- *     description: Returns an array of parts-supply
+ *     description: Returns an array of products-supply
  *     responses:
  *       200:
  *         description: Success
@@ -48,11 +48,11 @@ router.get("/past-week", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SY
 
 /**
  * @swagger
- * /api/v1/parts-supply/paginated:
+ * /api/v1/products-supply/paginated:
  *   get:
  *     tags:
  *       - PartSupplies
- *     description: Returns an array of parts-supply
+ *     description: Returns an array of products-supply
  *     responses:
  *       200:
  *         description: Success
@@ -67,11 +67,11 @@ router.get("/paginated", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SY
 
 /**
  * @swagger
- * /api/v1/parts-supply/active:
+ * /api/v1/products-supply/active:
  *   get:
  *     tags:
  *       - PartSupplies
- *     description: Returns an array of parts-supply
+ *     description: Returns an array of products-supply
  *     responses:
  *       200:
  *         description: Success
@@ -87,7 +87,7 @@ router.get("/active", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTE
 
 /**
  * @swagger
- * /api/v1/parts-supply/search:
+ * /api/v1/products-supply/search:
  *   get:
  *     tags:
  *       - PartSupplies
@@ -111,7 +111,7 @@ router.get('/search', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTE
 
 /**
  * @swagger
- * /api/v1/part-supply/search/paginated:
+ * /api/v1/products-supply/search/paginated:
  *   get:
  *     tags:
  *       - PartSupplies
@@ -135,11 +135,11 @@ router.get('/search/paginated', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_
 
 /**
  * @swagger
- * /api/v1/parts-supply/statistics:
+ * /api/v1/products-supply/statistics:
  *   get:
  *     tags:
  *       - PartSupplies
- *     description: Returns an array of parts-supply
+ *     description: Returns an array of products-supply
  *     responses:
  *       200:
  *         description: Success
@@ -155,7 +155,7 @@ router.get("/statistics", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.S
 
 /**
  * @swagger
- * /api/v1/parts-supply/{id}:
+ * /api/v1/products-supply/{id}:
  *   get:
  *     tags:
  *       - PartSupplies
@@ -177,7 +177,7 @@ router.get("/:id", requestHandler(controller.get_by_id));
 
 /**
  * @swagger
- * /api/v1/parts-supply/supplier/{id}:
+ * /api/v1/products-supply/supplier/{id}:
  *   get:
  *     tags:
  *       - PartSupplies
@@ -200,7 +200,7 @@ router.get("/supplier/:id", requestHandler(controller.get_all_by_supplier));
 
 /**
  * @swagger
- * /api/v1/parts-supply/receiver/{id}:
+ * /api/v1/products-supply/receiver/{id}:
  *   get:
  *     tags:
  *       - PartSupplies
@@ -222,7 +222,7 @@ router.get("/receiver/:id", requestHandler(controller.get_all_by_receiver));
 
 /**
  * @swagger
- * /api/v1/parts-supply:
+ * /api/v1/products-supply:
  *   post:
  *     tags:
  *       - PartSupplies
@@ -248,7 +248,7 @@ router.post("/", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADM
 
 /**
  * @swagger
- * /api/v1/parts-supply/{id}:
+ * /api/v1/products-supply/{id}:
  *   put:
  *     tags:
  *       - PartSupplies
@@ -280,7 +280,7 @@ router.put("/:id", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_A
 
 /**
  * @swagger
- * /api/v1/parts-supply/{id}:
+ * /api/v1/products-supply/{id}:
  *   delete:
  *     tags:
  *       - PartSupplies

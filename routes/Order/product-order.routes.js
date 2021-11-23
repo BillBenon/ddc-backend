@@ -11,7 +11,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/v1/part-orders:
+ * /api/v1/products-orders:
  *   get:
  *     tags:
  *       - PartOrders
@@ -28,7 +28,7 @@ router.get('/', requestHandler(controller.get_all))
 
 /**
  * @swagger
- * /api/v1/part-orders/{id}:
+ * /api/v1/products-orders/{id}:
  *   get:
  *     tags:
  *       - PartOrders
@@ -50,7 +50,7 @@ router.get('/:id', requestHandler(controller.get_by_id))
 
 /**
  * @swagger
- * /api/v1/part-orders/{id}:
+ * /api/v1/products-orders/{id}:
  *   delete:
  *     tags:
  *       - PartOrders
@@ -73,7 +73,7 @@ router.delete('/:id', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTE
 
 /**
  * @swagger
- * /api/v1/part-orders:
+ * /api/v1/products-orders:
  *   post:
  *     tags:
  *       - PartOrders
@@ -98,7 +98,7 @@ router.post('/', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADM
 
 /**
  * @swagger
- * /api/v1/part-orders/paginated:
+ * /api/v1/products-orders/paginated:
  *   get:
  *     tags:
  *       - PartOrders
@@ -116,7 +116,7 @@ router.get('/paginated', requestHandler(controller.get_all_paginated))
 
 /**
  * @swagger
- * /api/v1/part-orders/active:
+ * /api/v1/products-orders/active:
  *   get:
  *     tags:
  *       - PartOrders
@@ -134,7 +134,7 @@ router.get('/active', requestHandler(controller.get_all_active))
 
 /**
  * @swagger
- * /api/v1/part-orders/order/{id}:
+ * /api/v1/products-orders/order/{id}:
  *   get:
  *     tags:
  *       - PartOrders
@@ -156,7 +156,7 @@ router.get('/order/:id', requestHandler(controller.get_all_by_order))
 
 /**
  * @swagger
- * /api/v1/part-orders/products/push/{id}:
+ * /api/v1/products-orders/products/push/{id}:
  *   put:
  *     tags:
  *       - PartOrders
@@ -185,7 +185,7 @@ router.put('/products/push/:id', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY
 
 /**
  * @swagger
- * /api/v1/part-orders/products/pop/{id}/product/{productId}:
+ * /api/v1/products-orders/products/pop/{id}/product/{productId}:
  *   delete:
  *     tags:
  *       - PartOrders
