@@ -89,7 +89,7 @@ productSchema.plugin(timestamps);
 productSchema.plugin(pagination);
 productSchema.virtual('imageUrls').get(function () {
     return this.photos.map((photo) => {
-        return process.env.FILE_SERVER_URL + "/" + encodeUrl(photo.path)
+        return encodeUrl(photo.path)
     })
 });
 

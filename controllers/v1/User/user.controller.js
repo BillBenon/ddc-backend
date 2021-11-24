@@ -5,7 +5,7 @@ const {Supplier} = require("../../../models/Supply/supplier.model");
 const {Employee} = require("../../../models/Employee/employees.model");
 const {Customer} = require("../../../models/Customer/customer.model");
 const {uploadUserProfile} = require("../../../middlewares/multer.middleware");
-const {API_RESPONSE} = require("../../../utils/common");
+const {API_RESPONSE, cloudinary_configuration} = require("../../../utils/common");
 const {
     User,
     validateUser,
@@ -523,7 +523,13 @@ router.put("/upload-profile/:id", [AUTH_MIDDLEWARE, uploadUserProfile.single('pr
         const exists = await User.findById(req.params.id);
         if (!exists) return res.status(400).send(API_RESPONSE(false, 'Customer not found', null, 400));
 
-        const updated = await User.findByIdAndUpdate(req.params.id, {profile: req.file.path}, {new: true});
+
+        let path = req.file.path;
+        await cloudinary_configuration.uploader.upload(req.file.profile, function (err, result) {
+            path = result.url
+        })
+
+        const updated = await User.findByIdAndUpdate(req.params.id, {profile: path}, {new: true});
         if (!updated) return res.status(500).send(API_RESPONSE(false, 'User profile not updated', null, 500));
         return res.status(201).send(updated);
 

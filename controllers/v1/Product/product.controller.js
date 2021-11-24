@@ -1,5 +1,5 @@
 const express = require("express");
-const {immutate, fileFromPathUnlink} = require("../../../utils/common");
+const {immutate, fileFromPathUnlink, cloudinary_configuration} = require("../../../utils/common");
 const {ProductCategory} = require("../../../models/ProductCategory/category.model");
 const {ProductOnMarket} = require("../../../models/Market/product-on-market.model");
 const {SuppliedProduct} = require("../../../models/Supply/supplied-products.model");
@@ -184,7 +184,10 @@ exports.upload_pic = async function (req, res) {
     const product = await Product.findOne({_id: req.params.id, active: true});
     if (!product) return res.status(404).send(API_RESPONSE(false, 'Product not found', null, 400));
 
-    product.photos.push({path: req.file.path})
+
+    await cloudinary_configuration.uploader.upload(req.file.image, function (err, result) {
+        product.photos.push({path: result.url})
+    })
 
     const updated = await product.save();
     if (updated) return res.status(201).send((updated));

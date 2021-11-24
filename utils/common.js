@@ -5,8 +5,17 @@ const _ = require('lodash');
 const unlinkAsync = promisify(fs.unlink);
 const bcrypt = require('bcryptjs')
 const {DURATION_TYPE_ENUM} = require("./enumerations/constants");
+const cloudinary = require("cloudinary").v2;
 
 const BASE_DIR = '../../';
+
+
+exports.cloudinary_configuration = cloudinary.config({
+    cloud_name:'ddc-application',
+    api_key:'913255555598951',
+    api_secret:'fEXCMnUCsbZcB4qLrbpOU66yRjA'
+})
+
 
 exports.fileUnlink = async (PATH_DIRECTORY, file_prefix, file) => {
     const filename = BASE_DIR + PATH_DIRECTORY + file;

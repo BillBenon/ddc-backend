@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
-
+const {spawn} = require("child_process");
+const path = require('path');
 const db = (process.env.NODE_ENV === 'production') ? process.env.MONGO_URI : process.env.MONGO_TEST_URI;
+const cron = require('node-cron');
 
 mongoose.set('toObject', {virtuals: true});
 
@@ -16,4 +18,7 @@ const connectDB = async () => {
     }
 };
 
+
+
 connectDB().then();
+
