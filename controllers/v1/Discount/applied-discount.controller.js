@@ -93,7 +93,7 @@ exports.create = async function (req, res) {
         const saved = await appliedCoupon.save();
         if (!saved) return res.status(500).send(API_RESPONSE(false, 'AppliedCouponCode not saved', null, 400));
 
-        const message = customer.user.firstName + " " + customer.user.lastName + " applied the discount whose coupon " + discount?.coupon_code;
+        const message = customer.user.firstName + " " + customer.user.lastName + " applied the discount whose coupon " + discount.coupon_code;
         await notifyMany(await getAllAdmins(), discount._id, NOTIFICATION_TYPE_ENUM.DISCOUNT_APPLIED, message);
 
         return res.status(201).send(saved);
