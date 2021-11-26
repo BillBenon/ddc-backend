@@ -15,9 +15,16 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "axios": "^0.21.1        \"body-parser\": \"^1.19.0\",\n        \"config\": \"^3.2.5\",\n        \"cors\": \"^2.8.5\",\n        \"crypto-js\": \"^4.0.0\",\n        \"dotenv\": \"^8.2.0\",\n        \"email-templates\": \"^8.0.8\",\n        \"express\": \"^4.17.1\",\n        \"jade\": \"^1.11.0\",",
+        "axios": "^0.21.1",
         "bcryptjs": "^2.4.3",
-
+        "body-parser": "^1.19.0",
+        "config": "^3.2.5",
+        "cors": "^2.8.5",
+        "crypto-js": "^4.0.0",
+        "dotenv": "^8.2.0",
+        "email-templates": "^8.0.8",
+        "express": "^4.17.1",
+        "jade": "^1.11.0",
         "joi": "^14.3.1",
         "joi-objectid": "^3.0.1",
         "jsonwebtoken": "^8.5.1",
@@ -40,6 +47,7 @@
         "node": "12.14.1"
     },
     "devDependencies": {
+        "cloudinary": "^1.27.1",
         "jest": "^26.6.3",
         "node-cron": "^3.0.0"
     }
