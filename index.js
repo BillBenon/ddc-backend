@@ -1,5 +1,4 @@
 const dotenv = require("dotenv");
-const cron = require('node-cron');
 
 if (process.env.NODE_ENV == "development")
     dotenv.config({path: `.env.development`})

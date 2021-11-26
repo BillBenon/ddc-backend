@@ -1,6 +1,5 @@
 require('./index');
 require('./config/socket.config')
-const cron = require("node-cron");
 const path = require("path");
 const {spawn} = require("child_process");
 
