@@ -1,10 +1,8 @@
-const express = require("express");
 const {immutate, fileFromPathUnlink, cloudinary_configuration} = require("../../../utils/common");
 const {ProductCategory} = require("../../../models/ProductCategory/category.model");
 const {ProductOnMarket} = require("../../../models/Market/product-on-market.model");
 const {SuppliedProduct} = require("../../../models/Supply/supplied-products.model");
 const {Product, validate, PRODUCT_POPULATOR} = require("../../../models/Product/product.model");
-const router = express.Router();
 const {validObjectId, dependencyChecker, API_RESPONSE} = require('../../../utils/common');
 
 
@@ -227,4 +225,3 @@ exports.get_all_paginated = async function (req, res) {
 }
 
 
-module.exports = router;

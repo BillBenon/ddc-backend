@@ -26,6 +26,25 @@ const router = express.Router();
  */
 router.get("/", requestHandler(controller.get_all))
 
+
+/**
+ * @swagger
+ * /api/v1/products/paginated:
+ *   get:
+ *     tags:
+ *       - Products
+ *     description: Returns paginated  array of  products
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get("/paginated", requestHandler(controller.get_all_paginated))
+
+
 /**
  * @swagger
  * /api/v1/products/{id}:
@@ -49,8 +68,6 @@ router.get("/", requestHandler(controller.get_all))
  */
 
 router.delete("/:id", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.delete));
-
-
 
 
 /**
@@ -132,25 +149,6 @@ router.post("/", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADM
  */
 
 router.put("/:id", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.update));
-
-
-/**
- * @swagger
- * /api/v1/products/paginated:
- *   get:
- *     tags:
- *       - SpareParts
- *     description: Returns paginated  array of Spare products
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Not found
- *       500:
- *         description: Internal Server Error
- */
-
-router.get("/paginated", requestHandler(controller.get_all_paginated))
 
 
 /**
@@ -306,7 +304,6 @@ router.get("/category/:id/paginated", requestHandler(controller.get_all_category
  */
 
 router.get("/:id/details", requestHandler(controller.get_details))
-
 
 
 /**

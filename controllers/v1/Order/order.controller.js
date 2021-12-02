@@ -1,4 +1,3 @@
-const express = require('express');
 const {immutate} = require("../../../utils/common");
 const {POPULATOR} = require("../../../models/Order/order.model");
 const {
@@ -20,7 +19,6 @@ const {
 const {Order, validate, validateDeliveryLocation} = require("../../../models/Order/order.model");
 const {Customer} = require("../../../models/Customer/customer.model");
 const {DeliveryZone} = require('../../../models/DeliveryLocation/delivery-zones.model');
-const router = express.Router();
 
 const {validObjectId, API_RESPONSE} = require('../../../utils/common');
 const {notifyMany} = require("../User/notifications.controller");

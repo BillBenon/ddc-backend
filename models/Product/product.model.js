@@ -17,9 +17,6 @@ const {COMPLETE_INFO_ENUM} = require("../../utils/enumerations/constants");
  *       product_code:
  *         type: string
  *         required: true
- *       part_number:
- *           type: string
- *           required: true
  *       weight:
  *          type: number
  *          required: false
@@ -104,7 +101,6 @@ function validate(data) {
     const schema = {
         name: Joi.string().required(),
         product_code: Joi.string().required(),
-        part_number: Joi.string().required(),
         weight: Joi.number(),
         second_hand: Joi.boolean().required(),
         complete_info_status: Joi.string(),

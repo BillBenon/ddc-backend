@@ -62,6 +62,9 @@ exports.create = async function (req, res) {
     let total_quantities = 0;
 
     let total_prices = 0;
+
+    let total_taxes = 0;
+
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -86,8 +89,10 @@ exports.create = async function (req, res) {
 
         partOnMarket.quantity -= product.quantity;
         product.price = (product.quantity * partOnMarket.unit_price);
+        product.total_tax = (product.quantity * partOnMarket.tax);
         await partOnMarket.save();
 
+        total_taxes += product.total_tax;
         total_prices += product.price;
         total_quantities += product.quantity;
     }
@@ -95,6 +100,7 @@ exports.create = async function (req, res) {
 
     req.body.total_product_quantities = total_quantities;
     req.body.total_products_price = total_prices;
+    req.body.total_taxes = total_taxes;
 
     const partOrder = new ProductOrder(req.body);
 
@@ -103,6 +109,8 @@ exports.create = async function (req, res) {
 
     order.total_order_price = total_prices;
     order.total_order_quantities = total_quantities;
+    order.total_order_tax = total_taxes;
+
     order.status = ORDER_STATUS_ENUM.PAYING;
 
     await order.save();

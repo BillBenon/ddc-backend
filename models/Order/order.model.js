@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const timestamps = require('mongoose-timestamp');
 const pagination = require('mongoose-paginate-v2');
-const { getEnumFromObject } = require("../../utils/common");
-const { ORDER_STATUS_ENUM } = require("../../utils/enumerations/constants");
+const {getEnumFromObject} = require("../../utils/common");
+const {ORDER_STATUS_ENUM} = require("../../utils/enumerations/constants");
 Joi.objectId = require('joi-objectid')(Joi);
 
 
@@ -58,6 +58,9 @@ const orderSchema = new mongoose.Schema({
     },
     total_order_price: {
         type: Number,
+    },
+    total_order_tax: {
+        type: Number
     },
     total_order_quantities: {
         type: Number,

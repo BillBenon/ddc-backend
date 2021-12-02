@@ -750,25 +750,11 @@ const saveToChildCollection = async (authenticatedUser = null, user, data) => {
 
                 const newSupplier = new Supplier({
                     user: user._id,
-                    address: data.address,
-                    supplier_type: data.supplier_type,
+                    address: data.address
                 });
                 saved = await newSupplier.save()
                 return await Supplier.populate(saved, {path: 'user'});
-            case 'SHIPPER':
-                const newShipper = new Shipper({
-                    user: user._id
-                });
-                saved = await newShipper.save();
 
-                let message = "A new Shipper is created with names " + user.firstName + " " + user.lastName
-
-                if (authenticatedUser)
-                    message = authenticatedUser.lastName + " " + authenticatedUser.firstName + " create a shipper with names " + user.firstName + " " + user.lastName
-
-                await notifyMany(await getAllAdmins(), saved._id, NOTIFICATION_TYPE_ENUM.NEW_SHIPPER_CREATED, message)
-
-                return await Shipper.populate(saved, {path: 'user'});
             case 'EMPLOYEE':
                 validation = validateEmployee(data);
                 if (validation.error) {

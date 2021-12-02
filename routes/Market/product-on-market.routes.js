@@ -25,9 +25,67 @@ const router = express.Router();
  *       500:
  *         description: Internal Server Error
  */
-
 router.get("/", requestHandler(controller.get_all));
 
+/**
+ * @swagger
+ * /api/v1/products-on-market/top-products:
+ *   get:
+ *     tags:
+ *       - PartsOnMarket
+ *     description: Returns an array of spare products at market
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get("/top-products", requestHandler(controller.get_all_top_products))
+
+
+/**
+ * @swagger
+ * /api/v1/products-on-market/recommendation:
+ *   get:
+ *     tags:
+ *       - PartsOnMarket
+ *     description: Returns an array of spare products at market
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get("/recommendation", requestHandler(controller.get_all_recommendation));
+
+/**
+ * @swagger
+ * /api/v1/products-on-market/paginated:
+ *   get:
+ *     tags:
+ *       - ProductsOnMarket
+ *     description: Returns an array of ProductsOnMarket
+ *     parameters:
+ *       - name: page
+ *         description: page
+ *         in: query
+ *         type: string
+ *       - name: limit
+ *         description: limit
+ *         in: query
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get("/paginated", requestHandler(controller.get_all_paginated));
 
 /**
  * @swagger
@@ -48,9 +106,51 @@ router.get("/", requestHandler(controller.get_all));
  *       404:
  *         description: Not found
  */
-
 router.get("/:id", requestHandler(controller.get_by_id))
 
+
+/**
+ * @swagger
+ * /api/v1/products-on-market/product/{id}:
+ *   get:
+ *     tags:
+ *       - ProductOnMarket
+ *     description: Returns a single part on makert
+ *     parameters:
+ *       - name: id
+ *         description: part in stock's id
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ */
+router.get("/product/:id", requestHandler(controller.get_by_product))
+
+
+/**
+ * @swagger
+ * /api/v1/products-on-market/product/{id}/exists:
+ *   get:
+ *     tags:
+ *       - PartsOnMarket
+ *     description: Returns a single part on makert
+ *     parameters:
+ *       - name: id
+ *         description: part in stock's id
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ */
+router.get("/product/:id/exists", requestHandler(controller.get_by_product_exists))
 
 /**
  * @swagger
@@ -74,8 +174,6 @@ router.get("/:id", requestHandler(controller.get_by_id))
  *       500:
  *         description: Internal Server Error
  */
-
-
 router.post("/", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.create));
 
 
@@ -107,7 +205,6 @@ router.post("/", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADM
  *       500:
  *         description: Internal Server Error
  */
-
 router.put("/:id", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.update))
 
 
@@ -157,35 +254,7 @@ router.put('/toogle/showcase/:id', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGO
  *       500:
  *         description: Internal Server Error
  */
-
 router.delete("/:id", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.delete));
-
-
-/**
- * @swagger
- * /api/v1/products-on-market/paginated:
- *   get:
- *     tags:
- *       - ProductsOnMarket
- *     description: Returns an array of ProductsOnMarket
- *     parameters:
- *       - name: page
- *         description: page
- *         in: query
- *         type: string
- *       - name: limit
- *         description: limit
- *         in: query
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Not found
- *       500:
- *         description: Internal Server Error
- */
-
-router.get("/paginated", requestHandler(controller.get_all_paginated));
 
 
 /**
@@ -287,45 +356,10 @@ router.get("/valid", requestHandler(controller.get_all_valid))
  *       500:
  *         description: Internal Server Error
  */
-
 router.get("/vanishing-products", requestHandler(controller.get_all_vanishing));
 
 
-/**
- * @swagger
- * /api/v1/products-on-market/recommendation:
- *   get:
- *     tags:
- *       - PartsOnMarket
- *     description: Returns an array of spare products at market
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Not found
- *       500:
- *         description: Internal Server Error
- */
-router.get("/recommendation", requestHandler(controller.get_all_recommendation));
 
-
-/**
- * @swagger
- * /api/v1/products-on-market/top-products:
- *   get:
- *     tags:
- *       - PartsOnMarket
- *     description: Returns an array of spare products at market
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Not found
- *       500:
- *         description: Internal Server Error
- */
-
-router.get("/top-products", requestHandler(controller.get_all_top_products))
 
 
 /**

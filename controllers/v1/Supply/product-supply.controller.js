@@ -6,7 +6,7 @@ const {
     EMPLOYEE_STATUS_ENUM,
     NOTIFICATION_TYPE_ENUM,
     DATE,
-    USER_CATEGORY_ENUM
+    USER_CATEGORY_ENUM, USER_STATUS_ENUM
 } = require("../../../utils/enumerations/constants");
 const {SUPPLIER_STATUS_ENUM} = require("../../../utils/enumerations/constants");
 const {SuppliedProduct} = require("../../../models/Supply/supplied-products.model");
@@ -155,11 +155,11 @@ exports.create = async function (req, res) {
     }).populate("user");
     if (!supplier) return res.status(404).send(API_RESPONSE(false, "Supplier not found", null, 400));
 
-    const employee = await Employee.findOne({
+    const user = await User.findOne({
         _id: req.body.reciever,
-        status: EMPLOYEE_STATUS_ENUM.ACTIVE
+        status: USER_STATUS_ENUM.ACTIVE
     }).populate("user");
-    if (!employee) return res.status(404).send(API_RESPONSE(false, "Receiver not found", null, 400));
+    if (!user) return res.status(404).send(API_RESPONSE(false, "Receiver not found", null, 400));
 
     const TODAY = new Date();
     req.body.month = TODAY.getUTCMonth();
@@ -168,16 +168,15 @@ exports.create = async function (req, res) {
     const weekMappings = getWeekOfMonth(req.body.year, req.body.month);
     req.body.week = getWeekRange(weekMappings, req.body.day);
 
-    const part = new ProductSupply(req.body);
+    const entity = new ProductSupply(req.body);
 
-    const saved = await part.save();
-    if (!saved) return res.status(500).send(API_RESPONSE(false, "PartSuppy not saved", null, 400));
+    const saved = await entity.save();
+    if (!saved) return res.status(500).send(API_RESPONSE(false, "ProductSupply not saved", null, 400));
 
-    const message = supplier.user.firstName + " " + supplier.user.lastName + " Supplied some spare parts and was received by " + employee.user.firstName + " " + employee.user.lastName;
+    const message = "Congrats ... 🎉🎉🎉 You have supplied some products successfully.";
 
     await notifyMany(await getAllAdmins(), saved._id, NOTIFICATION_TYPE_ENUM.SUPPLY, message)
-    await notifyMany(await getAllSalesManagers(), saved._id, NOTIFICATION_TYPE_ENUM.SUPPLY, message)
-
+    // await notifyMany(await getAllSalesManagers(), saved._id, NOTIFICATION_TYPE_ENUM.SUPPLY, message)
     return res.status(201).send(saved);
 }
 

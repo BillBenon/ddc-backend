@@ -105,7 +105,7 @@ app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 app.use(cors());
 
-app.use("/api/v1/user-categories", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN, USER_CATEGORY_ENUM.EMPLOYEE])], userCategoryController);
+app.use("/api/v1/user-categories", userCategoryController);
 app.use("/api/v1/employee-roles", [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], employeeRolesController);
 app.use("/api/v1/employee-categories", employeeCategoriesController);
 app.use("/api/v1/users", userController);

@@ -5,7 +5,6 @@ const {requestHandler} = require("../../utils/common");
 const {AUTH_MIDDLEWARE} = require("../../middlewares/authorisation/auth.middleware");
 const {isUserCategory} = require("../../middlewares/authorisation/isUserCategory.middleware");
 const {USER_CATEGORY_ENUM} = require("../../utils/enumerations/constants");
-const {request} = require("express");
 
 const router = express.Router();
 
@@ -26,6 +25,47 @@ const router = express.Router();
  *         description: Internal Server Error
  */
 router.get('/', requestHandler(controller.get_all))
+
+
+/**
+ * @swagger
+ * /api/v1/orders/customer/{id}/paginated:
+ *   get:
+ *     tags:
+ *       - Orders
+ *     description: Returns an array Orders of a Customer
+ *     parameters:
+ *       - name: id
+ *         description: Customer's id
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ */
+router.get('/customer/:id/paginated', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN, USER_CATEGORY_ENUM.CUSTOMER])], requestHandler(controller.get_all_by_customer_paginated))
+
+
+/**
+ * @swagger
+ * /api/v1/orders/paginated:
+ *   get:
+ *     tags:
+ *       - Orders
+ *     description: Returns an array of Orders
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get('/paginated', requestHandler(controller.get_all_paginated))
+
 
 /**
  * @swagger
@@ -156,24 +196,6 @@ router.post('/', [AUTH_MIDDLEWARE], requestHandler(controller.create));
  *         description: Internal Server Error
  */
 router.put('/:id/status/:status', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.change_status));
-
-
-/**
- * @swagger
- * /api/v1/orders/paginated:
- *   get:
- *     tags:
- *       - Orders
- *     description: Returns an array of Orders
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Not found
- *       500:
- *         description: Internal Server Error
- */
-router.get('/paginated', requestHandler(controller.get_all_paginated))
 
 
 /**
@@ -366,28 +388,6 @@ router.get('/:id/details', requestHandler(controller.get_details))
  *         description: Not found
  */
 router.get('/customer/:id', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN, USER_CATEGORY_ENUM.CUSTOMER])], requestHandler(controller.get_all_by_customer))
-
-
-/**
- * @swagger
- * /api/v1/orders/customer/{id}/paginated:
- *   get:
- *     tags:
- *       - Orders
- *     description: Returns an array Orders of a Customer
- *     parameters:
- *       - name: id
- *         description: Customer's id
- *         in: path
- *         required: true
- *         type: string
- *     responses:
- *       200:
- *         description: Success
- *       404:
- *         description: Not found
- */
-router.get('/customer/:id/paginated', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN, USER_CATEGORY_ENUM.CUSTOMER])], requestHandler(controller.get_all_by_customer_paginated))
 
 
 /**

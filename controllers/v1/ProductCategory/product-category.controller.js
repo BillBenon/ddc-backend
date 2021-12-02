@@ -1,7 +1,5 @@
-const express = require('express');
 const {ProductCategory, validate} = require("../../../models/ProductCategory/category.model");
 const {validObjectId, dependencyChecker, API_RESPONSE} = require('../../../utils/common');
-const router = express.Router();
 const _ = require('lodash')
 const {Product} = require("../../../models/Product/product.model");
 
@@ -94,4 +92,3 @@ exports.delete = async function (req, res) {
 }
 
 
-module.exports = router;

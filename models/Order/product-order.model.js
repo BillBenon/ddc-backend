@@ -72,9 +72,17 @@ const productOrderSchema = new mongoose.Schema({
         price: {
             type: Number,
             required: true
+        },
+        total_tax: {
+            type: Number,
+            required: true
         }
     }],
     total_products_price: {
+        type: Number,
+        required: true
+    },
+    total_taxes: {
         type: Number,
         required: true
     },

@@ -152,12 +152,12 @@ router.get("/active", requestHandler(controller.get_all_active))
  *       404:
  *         description: Not found
  */
-router.get("/product-supply/:id", requestHandler(controller.get_all_by_product_supply));
+router.get("/products-supply/:id", requestHandler(controller.get_all_by_product_supply));
 
 
 /**
  * @swagger
- * /api/v1/supplied-products/spare-products/{id}:
+ * /api/v1/supplied-products/products/{id}:
  *   get:
  *     tags:
  *       - SuppliedParts

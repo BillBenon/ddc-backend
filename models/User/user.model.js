@@ -239,8 +239,7 @@ exports.validateShipper = (data) => {
 
 exports.validateSupplier = (user) => {
     const schema = {
-        address: Joi.string(),
-        supplier_type: Joi.string().valid(...getEnumFromObject(SUPPLIER_TYPE_ENUM)).required()
+        address: Joi.string()
     }
     return Joi.validate(user, schema)
 }

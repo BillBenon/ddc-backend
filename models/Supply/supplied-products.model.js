@@ -57,7 +57,7 @@ const SuppliedProduct = mongoose.model("SuppliedProduct", suppliedPartSchema);
 
 function validate(data) {
     const schema = {
-        part_supply: Joi.objectId().required(),
+        product_supply: Joi.objectId().required(),
         product: Joi.objectId().required(),
         quantity: Joi.number().required(),
         supply_price: Joi.number().min(0).required()

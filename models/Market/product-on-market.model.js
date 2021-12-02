@@ -17,6 +17,8 @@ const {getEnumFromObject, encodeUrl} = require("../../utils/common");
  *         type: string
  *       unit_price:
  *         type: number
+ *       tax:
+ *         type: number
  *       quantity:
  *         type: number
  *       createdAt:
@@ -45,6 +47,11 @@ const productOnMarketSchema = new mongoose.Schema({
     }],
     unit_price: {
         type: Number,
+        required: true
+    },
+    tax: {
+        type: Number,
+        default: 0,
         required: true
     },
     quantity: {
@@ -86,12 +93,23 @@ productOnMarketSchema.plugin(pagination);
 
 const ProductOnMarket = mongoose.model('ProductOnMarket', productOnMarketSchema);
 
-function validate(data) {
+function validateUpdateProductOnMarket(data) {
     const schema = {
-        product: Joi.objectId().required(),
         unit_price: Joi.number().required(),
         quantity: Joi.number().required(),
-        complete_info_status: Joi.string()
+        complete_info_status: Joi.string(),
+        tax: Joi.number().required()
+    };
+    return Joi.validate(data, schema);
+}
+
+function validate(data) {
+    const schema = {
+        supplied_product: Joi.objectId().required(),
+        unit_price: Joi.number().required(),
+        quantity: Joi.number().required(),
+        complete_info_status: Joi.string(),
+        tax: Joi.number().required()
     };
     return Joi.validate(data, schema);
 }
@@ -103,6 +121,6 @@ module.exports.PRODUCT_ON_MARKET_POPULATOR = {
         path: 'supplies.supplied_product product_category'
     }
 }
-
+module.exports.validateUpdateProductOnMarket = validateUpdateProductOnMarket;
 module.exports.ProductOnMarket = ProductOnMarket;
 module.exports.validate = validate;
