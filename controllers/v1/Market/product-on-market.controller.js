@@ -289,7 +289,7 @@ exports.get_all_recommendation = async function (req, res) {
 
     const instances = await ProductOnMarket.paginate({
         active: true,
-        complete_info_status: COMPLETE_INFO_ENUM.COMPLETE
+        complete_info_status: COMPLETE_INFO_ENUM.COMPLETE, quantity: {$gt: 0}
     }, options);
 
     instances.docs = shuffle(instances.docs);
@@ -302,6 +302,7 @@ exports.get_all_top_products = async function (req, res) {
     const instances = await ProductOnMarket.find({
         active: true,
         complete_info_status: COMPLETE_INFO_ENUM.COMPLETE,
+        quantity: {$gt: 0},
         showcase: true
     }).sort({updatedAt: -1}).populate(PRODUCT_ON_MARKET_POPULATOR);
 
