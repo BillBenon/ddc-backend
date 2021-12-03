@@ -365,7 +365,7 @@ exports.create = async function (req, res) {
 
     const message = customer.user.firstName + " " + customer.user.lastName + " made an order."
 
-    await notifyMany(await getAllSalesManagers(), saved._id, NOTIFICATION_TYPE_ENUM.NEW_ORDER, message)
+    // await notifyMany(await getAllSalesManagers(), saved._id, NOTIFICATION_TYPE_ENUM.NEW_ORDER, message)
     await notifyMany(await getAllAdmins(), saved._id, NOTIFICATION_TYPE_ENUM.NEW_ORDER, message)
 
     return res.status(201).send(saved);
