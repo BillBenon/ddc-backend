@@ -1,2 +1,2 @@
-# DDC COMPANY
-ddc Backend Repository
+# DDC Cosmetics
+ddc cosmetics Backend Repository
