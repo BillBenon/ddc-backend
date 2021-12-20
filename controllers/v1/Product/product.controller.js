@@ -19,8 +19,8 @@ exports.create = async function (req, res) {
     if (!category) return res.status(404).send(API_RESPONSE(false, 'ProductCategory not found.', null, 404));
 
 
-    let existing = await Product.findOne({product_code: req.body.product_code, active: true})
-    if (existing) return res.status(400).send(API_RESPONSE(false, "Product Code already exists", null, 400))
+    // let existing = await Product.findOne({product_code: req.body.product_code, active: true})
+    // if (existing) return res.status(400).send(API_RESPONSE(false, "Product Code already exists", null, 400))
 
     const product = new Product(req.body);
 

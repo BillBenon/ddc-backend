@@ -15,6 +15,12 @@ exports.get_by_id = async function (req, res) {
     return res.status(200).send(category);
 }
 
+exports.get_exists_by_name = async function (req, res) {
+    const category = await ProductCategory.findOne({name: req.params.name});
+    if (!category) return res.status(200).send({exists: false, object: null});
+    return res.status(200).send({exists: true, object: category});
+}
+
 exports.create = async function (req, res) {
     const {error} = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);

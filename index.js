@@ -56,7 +56,11 @@ const {Product} = require("./models/Product/product.model");
 const {User} = require("./models/User/user.model");
 const {AppUpdate} = require("./models/AppUpdate/app-update-model");
 const {backupMongoDB} = require("./models/db");
-
+const {ProductSupply} = require("./models/Supply/product-supply.model");
+const {SuppliedProduct} = require("./models/Supply/supplied-products.model");
+const {ProductOnMarket} = require("./models/Market/product-on-market.model");
+const {Order} = require("./models/Order/order.model");
+const {ProductOrder} = require("./models/Order/product-order.model");
 
 
 const PORT = process.env.PORT || 4007;
@@ -301,32 +305,31 @@ app.get('/api/files/load/:path', async (req, res) => {
 app.get('/test', async (req, res) => {
     try {
 
-        //
-
-        // let incomes = await Income.find();
-        // let i = 0;
-        // for (const income of incomes) {
-        //     await Income.findByIdAndDelete(income._id)
-        //     if (++i == 100)
-        //         break;
-        // }
-
-        // do some thing
-        // let data = await CarSupply.find()
+        // let data = await ProductSupply.find()
         // for (const datum of data)
-        //     await CarSupply.findByIdAndDelete(datum._id)
+        //     await ProductSupply.findByIdAndDelete(datum._id)
         //
-        // data = await SuppliedCar.find()
+        // data = await SuppliedProduct.find()
         // for (const datum of data)
-        //     await SuppliedCar.findByIdAndDelete(datum._id)
+        //     await SuppliedProduct.findByIdAndDelete(datum._id)
         //
-        // data = await CarOnMarkert.find()
+        // data = await Product.find()
         // for (const datum of data)
-        //     await CarOnMarkert.findByIdAndDelete(datum._id)
+        //     await Product.findByIdAndDelete(datum._id)
         //
-        // data = await CarDirectPurchase.find()
+        // data = await ProductOnMarket.find()
         // for (const datum of data)
-        //     await CarDirectPurchase.findByIdAndDelete(datum._id)
+        //     await ProductOnMarket.findByIdAndDelete(datum._id)
+        //
+        //
+        // data = await Order.find()
+        // for (const datum of data)
+        //     await Order.findByIdAndDelete(datum._id)
+        //
+        //
+        // data = await ProductOrder.find()
+        // for (const datum of data)
+        //     await ProductOrder.findByIdAndDelete(datum._id)
 
         // data = await CarOrder.find()
         // for (const datum of data)
@@ -362,6 +365,7 @@ app.get('/test', async (req, res) => {
 
         // await sendTestingEmail("andesanselme@gmail.com")
         // return res.send({savedLen: savedParts.length, existingLen: spareParts.length, parts: savedParts})
+        // return res.send("DONE")
     } catch (e) {
         return res.send(e.message)
     }

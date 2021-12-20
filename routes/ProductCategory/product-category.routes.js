@@ -121,6 +121,29 @@ router.get("/search/paginated", requestHandler(controller.search_paginated))
  */
 router.get('/:id', requestHandler(controller.get_by_id))
 
+
+/**
+ * @swagger
+ * /api/v1/product-categories/category-name/exists/{name}:
+ *   get:
+ *     tags:
+ *       - ProductCategories
+ *     description: Returns a single ProductCategory
+ *     parameters:
+ *       - name: id
+ *         description: ProductCategory's id
+ *         in: path
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Success
+ *       404:
+ *         description: Not found
+ */
+router.get('/category-name/exists/:name', requestHandler(controller.get_exists_by_name))
+
+
 /**
  * @swagger
  * /api/v1/product-categories:
@@ -143,7 +166,7 @@ router.get('/:id', requestHandler(controller.get_by_id))
  *       500:
  *         description: Internal Server Error
  */
-router.get('/', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.create))
+router.post('/', [AUTH_MIDDLEWARE, isUserCategory([USER_CATEGORY_ENUM.SYSTEM_ADMIN])], requestHandler(controller.create))
 
 
 /**
