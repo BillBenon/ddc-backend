@@ -87,6 +87,7 @@ router.get("/recommendation", requestHandler(controller.get_all_recommendation))
  */
 router.get("/paginated", requestHandler(controller.get_all_paginated));
 
+
 /**
  * @swagger
  * /api/v1/products-on-market/{id}:

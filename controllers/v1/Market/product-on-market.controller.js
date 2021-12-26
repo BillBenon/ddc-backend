@@ -14,6 +14,7 @@ const {OrderDiscount} = require("../../../models/Discount/order-discount.model")
 const {validObjectId, dependencyChecker, API_RESPONSE} = require('../../../utils/common');
 const {Category} = require("../../../models/Employee/categories.model");
 const {SuppliedProduct} = require("../../../models/Supply/supplied-products.model");
+const {ProductCategory} = require("../../../models/ProductCategory/category.model");
 
 
 exports.get_all = async function (req, res) {
@@ -315,12 +316,12 @@ exports.get_all_by_category = async function (req, res) {
     if (!(validObjectId(req.params.category)))
         return res.status(400).send(API_RESPONSE(false, 'INVALID OBJECTED', null, 400));
 
-    const category = await Category.findById(req.params.category)
-    if (!category) return res.status(200).send(API_RESPONSE(false, 'Product Sub ProductCategory not found', null, 400));
+    const category = await ProductCategory.findById(req.params.category)
+    if (!category) return res.status(200).send(API_RESPONSE(false, 'ProductCategory not found', null, 400));
 
 
     const products = await Product.find({
-        'category': req.params.category,
+        product_category: req.params.category,
         complete_info_status: COMPLETE_INFO_ENUM.COMPLETE
     })
 
