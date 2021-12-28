@@ -61,6 +61,7 @@ const {SuppliedProduct} = require("./models/Supply/supplied-products.model");
 const {ProductOnMarket} = require("./models/Market/product-on-market.model");
 const {Order} = require("./models/Order/order.model");
 const {ProductOrder} = require("./models/Order/product-order.model");
+const {ProductCategory} = require("./models/ProductCategory/category.model");
 
 
 const PORT = process.env.PORT || 4007;
@@ -305,9 +306,9 @@ app.get('/api/files/load/:path', async (req, res) => {
 app.get('/test', async (req, res) => {
     try {
 
-        // let data = await ProductSupply.find()
+        // let data = await ProductCategory.find()
         // for (const datum of data)
-        //     await ProductSupply.findByIdAndDelete(datum._id)
+        //     await ProductCategory.findByIdAndDelete(datum._id)
         //
         // data = await SuppliedProduct.find()
         // for (const datum of data)
