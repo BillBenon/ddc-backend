@@ -1,2 +1,2 @@
 # DDC COMPANY
-ddc Backend Repository
+ddc-ecommerce Backend Repository
