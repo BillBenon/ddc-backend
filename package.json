@@ -9,8 +9,7 @@
         "serve:dev": "NODE_ENV=development nodemon app.js",
         "start": "node app.js",
         "serve:test": "node app.js",
-        "start:prod": "pm2 restart \"KAR Backend\"",
-        "start:test": "pm2 restart \"KAR Backend DEV\""
+        "start:prod": "pm2 restart \"DdcBackendAPI\""
     },
     "author": "",
     "license": "ISC",

@@ -332,7 +332,7 @@ router.get("/:id/details", requestHandler(controller.get_details))
  *       500:
  *         description: Internal Server Error
  */
-router.put('/upload-image/:id', [uploadProductPic.single('image')], requestHandler(controller.upload_pic))
+router.put('/upload-image/:id',[ AUTH_MIDDLEWARE, isUserCategory([ USER_CATEGORY_ENUM.SYSTEM_ADMIN ]), uploadProductPic.single('image')], requestHandler(controller.upload_pic))
 
 
 /**
