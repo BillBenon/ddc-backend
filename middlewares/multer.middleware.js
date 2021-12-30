@@ -112,67 +112,6 @@ const productStorage = multer.diskStorage({
 });
 
 
-const paymentOrderReceiptStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const PATH = ROOT_PATH + 'payment-receipts/car-orders';
-        try {
-            if (fs.existsSync(PATH)) {
-                cb(null, PATH)
-            } else {
-                fs.mkdirSync(PATH, {recursive: true});
-                cb(null, PATH)
-            }
-        } catch (e) {
-            console.error(e)
-        }
-    },
-    filename: function (req, file, cb) {
-        const id = uuid();
-        cb(null, 'purchase-' + id + '.' + file.originalname.split('.').pop());
-    }
-});
-
-
-const paymentDirectPurchaseReceiptStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const PATH = ROOT_PATH + 'payment-receipts/car-direct-purchases';
-        try {
-            if (fs.existsSync(PATH)) {
-                cb(null, PATH)
-            } else {
-                fs.mkdirSync(PATH, {recursive: true});
-                cb(null, PATH)
-            }
-        } catch (e) {
-            console.error(e)
-        }
-    },
-    filename: function (req, file, cb) {
-        const id = uuid();
-        cb(null, 'spare-part-' + id + '.' + file.originalname.split('.').pop());
-    }
-});
-
-
-const carPhotoStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        const PATH = ROOT_PATH + 'images/car-photos';
-        try {
-            if (fs.existsSync(PATH)) {
-                cb(null, PATH)
-            } else {
-                fs.mkdirSync(PATH, {recursive: true});
-                cb(null, PATH)
-            }
-        } catch (e) {
-            console.error(e)
-        }
-    },
-    filename: function (req, file, cb) {
-        const id = uuid();
-        cb(null, 'car-' + id + '.' + file.originalname.split('.').pop());
-    }
-});
 
 const categoryfileFilter = async (req, file, cb) => {
     // reject a file
@@ -237,7 +176,7 @@ const sparePartFileFilter = async (req, file, cb) => {
     // reject a file
     const id = req.path.substring(req.path.lastIndexOf('/'));
 
-    const filename = ROOT_PATH + 'images/spare-parts/' + 'spare-part-' + id.substring(1) + '.' + file.originalname.split('.').pop();
+    const filename = ROOT_PATH + 'images/products/' + 'product-' + id.substring(1) + '.' + file.originalname.split('.').pop();
     if (fs.existsSync(filename)) {
         await unlinkAsync(filename);
     }

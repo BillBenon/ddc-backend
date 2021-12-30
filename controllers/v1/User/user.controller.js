@@ -510,29 +510,11 @@ router.put("/:id", [AUTH_MIDDLEWARE], async (req, res) => {
 router.put("/upload-profile/:id", [AUTH_MIDDLEWARE, uploadUserProfile.single('profile')], async (req, res) => {
     try {
         if (!(validObjectId(req.params.id))) return res.status(400).send(API_RESPONSE(false, 'Invalid ObjectId', null, 400));
-
         if (!req.file) return res.status(400).send(API_RESPONSE(false, 'File not found', null, 404));
 
-        const existingEmail = await User.findOne({email: req.body.email, active: true});
-        if (existingEmail) return res.status(400).send(API_RESPONSE(false, 'User email exists', null, 400));
-
-        const existingPhone = await User.findOne({phone: req.body.phone, active: true});
-        if (existingPhone) return res.status(400).send(API_RESPONSE(false, 'User phone-number exists', null, 400));
-
-
-        const exists = await User.findById(req.params.id);
-        if (!exists) return res.status(400).send(API_RESPONSE(false, 'Customer not found', null, 400));
-
-
-        let path = req.file.path;
-        await cloudinary_configuration.uploader.upload(req.file.profile, function (err, result) {
-            path = result.url
-        })
-
-        const updated = await User.findByIdAndUpdate(req.params.id, {profile: path}, {new: true});
+        const updated = await User.findByIdAndUpdate(req.params.id, {profile: req.file.path}, {new: true});
         if (!updated) return res.status(500).send(API_RESPONSE(false, 'User profile not updated', null, 500));
         return res.status(201).send(updated);
-
     } catch (err) {
         return res.status(500).send(err);
     }

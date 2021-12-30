@@ -177,20 +177,16 @@ exports.get_details = async function (req, res) {
 exports.upload_pic = async function (req, res) {
     if (!(validObjectId(req.params.id))) return res.status(400).send(API_RESPONSE(false, 'Invalid ObjectId', null, 400));
 
-    if (!req.file) return res.status(400).send(API_RESPONSE(false, 'No file found', null, 400));
+    let entity = await Product.findById(req.params.id)
+    if (!entity) return res.status(404).send(API_RESPONSE(false, "Entity with this id does not exist", null, 404))
 
-    const product = await Product.findOne({_id: req.params.id, active: true});
-    if (!product) return res.status(404).send(API_RESPONSE(false, 'Product not found', null, 400));
+    if (!req.file) return res.status(400).send(API_RESPONSE(false, "Product Photo not found", null, null))
 
+    entity.photos.push({path: req.file.path})
 
-    await cloudinary_configuration.uploader.upload(req.file.image, function (err, result) {
-        product.photos.push({path: result.url})
-    })
-
-    const updated = await product.save();
-    if (updated) return res.status(201).send((updated));
-    return res.status(500).send(API_RESPONSE(false, 'An error occurred', null, 400))
-
+    const updated = await entity.save();
+    if (updated) return res.status(201).send(updated);
+    return res.status(500).send(API_RESPONSE(false, 'An error occurred', null, 500))
 }
 
 exports.delete_pic = async function (req, res) {
